@@ -20,7 +20,7 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies (production only)
-RUN --mount=type=cache,id=s/3c934dda-84a6-40ee-b4ad-ab7e3fb4f972-/root/.cache/uv,target=/root/.cache/uv \
+RUN --mount=type=cache,id=s/4e1a817a-3929-4aad-9c90-d2900a4ab497-/root/.cache/uv,target=/root/.cache/uv \
     uv sync --frozen --no-dev --no-group dev
 
 
