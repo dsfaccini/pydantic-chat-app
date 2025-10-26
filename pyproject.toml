@@ -1,0 +1,11 @@
+[project]
+name = "railway-firewall"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.120.0",
+    "logfire[fastapi,sqlite3]>=4.14.2",
+    "pydantic-ai>=1.6.0",
+]
