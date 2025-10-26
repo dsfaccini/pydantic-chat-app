@@ -60,4 +60,4 @@ ENV PORT=${PORT:-8080}
 EXPOSE $PORT
 
 # Run the application
-CMD ["uv", "run", "uvicorn", "chat_app:app", "--host", "0.0.0.0", "--port", "$PORT"]
+CMD ["uv", "run", "python", "chat_app.py"]
