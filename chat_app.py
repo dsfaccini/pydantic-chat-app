@@ -231,10 +231,14 @@ class Database:
 if __name__ == '__main__':
     import uvicorn
 
+    # Get host and port from environment variables, with defaults for containerized environments
+    host = os.environ.get("APP_HOST", "0.0.0.0")
+    port = int(os.environ.get("PORT", os.environ.get("APP_PORT", "8080")))
+
     uvicorn.run(
         "chat_app:app",
-        host=os.environ["APP_HOST"],
-        port=int(os.environ["APP_PORT"]),
+        host=host,
+        port=port,
         reload=is_dev,
         reload_dirs=[str(THIS_DIR)] if is_dev else None,
         proxy_headers=True,  # Trust X-Forwarded-* headers from reverse proxy
