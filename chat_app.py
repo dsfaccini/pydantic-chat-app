@@ -20,6 +20,7 @@ from functools import partial
 from pathlib import Path
 from typing import Annotated, Any, Literal, TypeVar
 
+from dotenv import load_dotenv
 import fastapi
 import logfire
 from fastapi import Depends, Request
@@ -44,6 +45,9 @@ logfire.instrument_pydantic_ai()
 agent = Agent('openai:gpt-4o')
 THIS_DIR = Path(__file__).parent
 
+is_dev = os.environ.get('APP_ENV') == 'development'
+if is_dev:
+    load_dotenv('.env')
 
 @asynccontextmanager
 async def lifespan(_app: fastapi.FastAPI):
@@ -227,10 +231,8 @@ class Database:
 if __name__ == '__main__':
     import uvicorn
 
-    is_dev = os.environ.get('APP_ENV') == 'development'
-
     uvicorn.run(
-        "src.app:app",
+        "chat_app:app",
         host=os.environ["APP_HOST"],
         port=int(os.environ["APP_PORT"]),
         reload=is_dev,
