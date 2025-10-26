@@ -9,6 +9,7 @@ from __future__ import annotations as _annotations
 
 import asyncio
 import json
+import os
 import sqlite3
 from collections.abc import AsyncIterator, Callable
 from concurrent.futures.thread import ThreadPoolExecutor
@@ -226,6 +227,13 @@ class Database:
 if __name__ == '__main__':
     import uvicorn
 
+    is_dev = os.environ.get('APP_ENV') == 'development'
+
     uvicorn.run(
-        'chat_app:app', reload=True, reload_dirs=[str(THIS_DIR)]
+        "src.app:app",
+        host=os.environ["APP_HOST"],
+        port=int(os.environ["APP_PORT"]),
+        reload=is_dev,
+        reload_dirs=[str(THIS_DIR)] if is_dev else None,
+        proxy_headers=True,  # Trust X-Forwarded-* headers from reverse proxy
     )
