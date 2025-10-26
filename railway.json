@@ -17,6 +17,7 @@
     "deploy": {
         "runtime": "V2",
         "numReplicas": 1,
+        "startCommand": "sh -c 'python -m uvicorn chat_app:app --host :: --port ${PORT:-8080}'",
         "sleepApplication": false,
         "useLegacyStacker": false,
         "multiRegionConfig": {
