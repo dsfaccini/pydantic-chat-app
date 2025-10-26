@@ -21,7 +21,7 @@ COPY pyproject.toml uv.lock ./
 
 # Install dependencies (production only)
 RUN --mount=type=cache,id=s/4e1a817a-3929-4aad-9c90-d2900a4ab497-/root/.cache/uv,target=/root/.cache/uv \
-    uv sync --frozen --no-dev --no-group dev
+    uv sync --frozen --no-dev
 
 
 # Production stage - minimal runtime image
